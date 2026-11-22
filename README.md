@@ -23,6 +23,12 @@ The recipes are fictional examples I used from the prompt and made up. There are
 3. Example: <img width="792" height="280" alt="image" src="https://github.com/user-attachments/assets/e173ff20-8e3a-4652-9f08-1b8dd5c0956c" />
 
 
+## TEST RESULTS
+What to expect: You should expect a properly working measurement scaler.
+
+Pass:<img width="727" height="262" alt="image" src="https://github.com/user-attachments/assets/a4f27e5f-d966-4eb8-8cc9-cfd53f774807" />
+
+Fail:<img width="866" height="266" alt="image" src="https://github.com/user-attachments/assets/bf756368-f2f4-48f4-8397-b5ac3c9f428c" />
 
 ## Limitation
 
