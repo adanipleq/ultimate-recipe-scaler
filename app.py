@@ -95,7 +95,8 @@ recipes = [
     },
 ]
 
-# Volunteers can't measure 3.3333 cups, so amounts are rounded UP 
+
+
 ROUNDING_STEP = {
     "tsp": 0.25,
     "tbsp": 0.5,
@@ -161,6 +162,15 @@ def format_number(x):
         return f"{remainder}/{frac.denominator}"
     return f"{whole} {remainder}/{frac.denominator}"
 
+def format_number(x):
+    """3.5 -> '3 1/2', 0.25 -> '1/4', 6.0 -> '6'."""
+    frac = Fraction(x).limit_denominator(8)
+    whole, remainder = divmod(frac.numerator, frac.denominator)
+    if remainder == 0:
+        return str(whole)
+    if whole == 0:
+        return f"{remainder}/{frac.denominator}"
+    return f"{whole} {remainder}/{frac.denominator}"
 
 def describe(ingredient):
     """One ingredient as a friendly line, e.g. '3 1/2 cups flour'."""
@@ -173,6 +183,16 @@ def describe(ingredient):
         unit += "s"
     return f"{number} {unit} {name}"
 
+def describe(ingredient):
+    """One ingredient as a friendly line, e.g. '3 1/2 cups flour'."""
+    amount = round_up(ingredient["amount"], ingredient["unit"])
+    number = format_number(amount)
+    name, unit = ingredient["name"], ingredient["unit"]
+    if unit == "each":
+        return f"{number} {name}{'s' if amount > 1 else ''}"
+    if unit in ("cup", "can") and amount > 1:
+        unit += "s"
+    return f"{number} {unit} {name}"
 
 def recipe_text(recipe):
     lines = [f"{recipe['name']} (serves {recipe['base_servings']})"]
@@ -338,4 +358,7 @@ if __name__ == "__main__":
 
 
 if __name__ == "__main__":
-    main()
+    if "--test" in sys.argv:
+        run_tests()
+    else:
+        main()

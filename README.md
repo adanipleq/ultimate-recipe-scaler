@@ -30,4 +30,3 @@ One limitation is that it is very case sensitive when it comes to asking questio
 
 ## AI USE CLARIFICATION
 I used ChatGPT EDU to help clarify the mistakes and errors in my code until I had a smooth running and decent product. I only used it to troubleshoot and correct mistakes. Everything else is my own work.
-
